@@ -1,0 +1,135 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link id="gatsby-global-css" href="/css/../css/styles.css" rel="stylesheet" type="text/css"/><meta name="generator" content="Gatsby 2.28.2"/><title data-react-helmet="true">手动创建macOS恢复分区 :: li的blog</title><meta data-react-helmet="true" name="description" content="手动创建macOS恢复分区 因为某些原因需要制作macOS的恢复盘，但是苹果官方的OS X 恢复磁盘助理早已不支持APFS文件系统。 打开终端，运行 会看到如下的内容： /dev/disk4 (synthesized): :                       TYPE…"/><meta data-react-helmet="true" property="og:title" content="手动创建macOS恢复分区"/><meta data-react-helmet="true" property="og:description" content="手动创建macOS恢复分区 因为某些原因需要制作macOS的恢复盘，但是苹果官方的OS X 恢复磁盘助理早已不支持APFS文件系统。 打开终端，运行 会看到如下的内容： /dev/disk4 (synthesized): :                       TYPE…"/><meta data-react-helmet="true" property="og:type" content="website"/><meta data-react-helmet="true" name="twitter:card" content="summary"/><meta data-react-helmet="true" name="twitter:title" content="手动创建macOS恢复分区"/><meta data-react-helmet="true" name="twitter:description" content="手动创建macOS恢复分区 因为某些原因需要制作macOS的恢复盘，但是苹果官方的OS X 恢复磁盘助理早已不支持APFS文件系统。 打开终端，运行 会看到如下的内容： /dev/disk4 (synthesized): :                       TYPE…"/><meta data-react-helmet="true" name="twitter:creator" content="li"/><meta data-react-helmet="true" name="keywords" content="gatsby, minimal, starter, blog, theme, dark, light, personal site"/><link rel="icon" href="/favicon-32x32.png?v=5965514e8ddfa2aa0a8cb13d87c965c2" type="image/png"/><link rel="manifest" href="/manifest.webmanifest" crossorigin="anonymous"/><meta name="theme-color" content="#292a2d"/><link rel="apple-touch-icon" sizes="48x48" href="/icons/icon-48x48.png?v=5965514e8ddfa2aa0a8cb13d87c965c2"/><link rel="apple-touch-icon" sizes="72x72" href="/icons/icon-72x72.png?v=5965514e8ddfa2aa0a8cb13d87c965c2"/><link rel="apple-touch-icon" sizes="96x96" href="/icons/icon-96x96.png?v=5965514e8ddfa2aa0a8cb13d87c965c2"/><link rel="apple-touch-icon" sizes="144x144" href="/icons/icon-144x144.png?v=5965514e8ddfa2aa0a8cb13d87c965c2"/><link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png?v=5965514e8ddfa2aa0a8cb13d87c965c2"/><link rel="apple-touch-icon" sizes="256x256" href="/icons/icon-256x256.png?v=5965514e8ddfa2aa0a8cb13d87c965c2"/><link rel="apple-touch-icon" sizes="384x384" href="/icons/icon-384x384.png?v=5965514e8ddfa2aa0a8cb13d87c965c2"/><link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512x512.png?v=5965514e8ddfa2aa0a8cb13d87c965c2"/><link as="script" rel="preload" href="/js/webpack-runtime.js"/><link as="script" rel="preload" href="/js/framework.js"/><link as="script" rel="preload" href="/js/app.js"/><link as="script" rel="preload" href="/js/styles.js"/><link as="script" rel="preload" href="/js/commons.js"/><link as="script" rel="preload" href="/js/55027a988c749907c8d0f13018f728b830987428.js"/><link as="script" rel="preload" href="/js/component---src-templates-page-js.js"/><link as="fetch" rel="preload" href="/page-data/2020/手动创建macOS恢复分区/page-data.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/sq/d/1425477374.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/sq/d/3128451518.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/app-data.json" crossorigin="anonymous"/></head><body class="light-theme"><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div class="container"><header class="header-module--header--tFeG9"><div class="header-module--inner--7ao1M"><a href="/"><div class="header-module--logo--2kX-3"><span class="header-module--text--3UAQj">li的blog</span></div></a><span class="header-module--right--1Zeb6"><div class="menu-module--mobileMenuContainer--T9wTN"><button class="menu-module--menuTrigger--32seM" style="color:inherit" type="button" aria-label="Menu"><span class="icon-module--root--aZeph" style="cursor:pointer" role="figure"><svg version="1.1" width="24" height="24" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M4 34H40V30H4V34ZM4 24H40V20H4V24ZM4 10V14H40V10H4Z" class="icon-module--icon--1ihz7"></path></svg></span></button></div><div class="menu-module--desktopMenuContainer--3iXKR"><ul class="menu-module--menu--dd4-Y"><li><a href="/about">关于</a></li></ul></div><button class="menu-module--themeToggle--2E8ye" type="button" aria-label="Theme toggle"><span class="icon-module--root--aZeph" style="cursor:pointer" role="figure"><svg version="1.1" width="24" height="24" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z" class="icon-module--icon--1ihz7"></path></svg></span></button></span></div></header><div class="content"><div class="post-module--post--28Mq2"><div class="post-module--postContent--1bfnt"><h1 class="post-module--title--3XBo2">手动创建macOS恢复分区</h1><div class="post-module--meta--3YtjE">2018-11-14<!-- --> <!-- -->— <!-- -->li</div><div><h1>手动创建macOS恢复分区</h1>
+<p>因为某些原因需要制作macOS的恢复盘，但是苹果官方的OS X 恢复磁盘助理早已不支持APFS文件系统。</p>
+<!-- more -->
+<p>打开终端，运行</p>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell">diskutil list</code></pre></div>
+<p>会看到如下的内容：</p>
+<blockquote>
+<p>/dev/disk4 (synthesized):</p>
+<h1>:                       TYPE NAME                    SIZE       IDENTIFIER</h1>
+<p>   0:      APFS Container Scheme -                      +42.7 GB    disk4
+Physical Store disk2s2
+1:                APFS Volume li                      26.3 GB    disk4s1
+2:                APFS Volume Preboot                 44.5 MB    disk4s2
+<font color='red'> 3:                APFS Volume Recovery                512.4 MB   disk4s3</font>
+4:                APFS Volume VM                      20.5 KB    disk4s4</p>
+</blockquote>
+<p>找到Recovery分区，然后挂载</p>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell">diskutil <span class="token function">mount</span> disk4s3</code></pre></div>
+<p>使用磁盘工具将需要制作的恢复分区格式化为HFS+ J格式</p>
+<p>创建目录（xxx为你需要创建的引导分区的挂载点）</p>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"><span class="token function">mkdir</span> -p /Volumes/xxxxx/System/Library/CoreServices</code></pre></div>
+<p>挂载Recovery分区下BaseSystem.dmg</p>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell">hdiutil attach /Volumes/Recovery/5A3C3475-7E2B-39A9-8C39-5BBEE5C156EC/BaseSystem.dmg</code></pre></div>
+<p>复制引导文件：</p>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"><span class="token function">cp</span> /Volumes/OS<span class="token punctuation">\</span> X<span class="token punctuation">\</span> Base<span class="token punctuation">\</span> System/System/Library/CoreServices/boot* System/Library/CoreServices
+<span class="token function">cp</span> /Volumes/OS<span class="token punctuation">\</span> X<span class="token punctuation">\</span> Base<span class="token punctuation">\</span> System/System/Library/CoreServices/BridgeVersion* System/Library/CoreServices
+<span class="token function">cp</span> /Volumes/OS<span class="token punctuation">\</span> X<span class="token punctuation">\</span> Base<span class="token punctuation">\</span> System/System/Library/CoreServices/PlatformSupport.plist System/Library/CoreServices
+<span class="token function">cp</span> /Volumes/OS<span class="token punctuation">\</span> X<span class="token punctuation">\</span> Base<span class="token punctuation">\</span> System/System/Library/CoreServices/SystemVersion.plist System/Library/CoreServices</code></pre></div>
+<p>创建引导配置文件，使得从BaseSystem.dmg进行第二阶段引导</p>
+<div class="gatsby-highlight" data-language="shell"><pre class="language-shell"><code class="language-shell"><span class="token function">mkdir</span> -p Library/Preferences/SystemConfiguration/
+<span class="token builtin class-name">echo</span> <span class="token string">"&lt;?xml version=1.0 encoding=UTF-8?>
+&lt;plist version=1.0>
+&lt;dict>
+&lt;key>Kernel Flags&lt;/key>
+&lt;string>root-dmg=file:///BaseSystem.dmg&lt;/string>
+&lt;/dict>
+&lt;/plist>"</span> <span class="token operator">></span> Library/Preferences/SystemConfiguration/com.apple.Boot.plist </code></pre></div>
+<p>复制内核缓存（解决VMware下引导失败）</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">cp -r /Volumes/OS\ X\ Base\ System/System/Library/PrelinkedKernels  System/Library/</code></pre></div>
+<p>选择启动磁盘即可（分区格式为EFI也可以识别的）</p>
+<p>====== 以前内容 ======</p>
+<p><strong>（以下方法在部分设备上无法引导）</strong></p>
+<p>在Finder（访达）中找到恢复分区的BaseSystem.dmg(第二阶段启动使用)</p>
+<div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">/Volumes/Recovery/5A3C3475-7E2B-39A9-8C39-5BBEE5C156EC/BaseSystem.dmg</code></pre></div>
+<p>打开磁盘工具，选择一个分区，使用恢复</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 313px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/dc1df5774e78c916e5d95d7d470ce829/8e749/macOS-rev.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 91.49999999999999%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAASCAIAAADUsmlHAAAACXBIWXMAAAsTAAALEwEAmpwYAAACyElEQVQ4y21TTU8TQRjei568iNGTX4mJCbT7vdud7W637XZ1t7utXQq0tJTSlqSlLalAJEFsEGiIHDRcPHv1B3jwCtw8e/Lf+OwuIKhPnkzemXk/nnlnhprKfXmQ/8rOfZ7ODB6SwZNkwKfaOsbHKth/lBw9E32enqZJWrbLjdpiu9ORZZnneer2i++37LPn9pFGhNcbW8Ph+s7OW9u2WZaFR+I6ZCkhCXGahqkoShBspDNesYSREPImxObm5ihEPp+XJAnryiWIqgohsI6RQvZczkoZBiFqsVgsl8soWygUarVaLpdTVTV5DZqmiaIIUWIICtUxgRL49fv9Xq83Ho9XV1exHpS6CTWsjK3gELJMIQE0YETiUqnkum6lUoGRSqWS/wNSpNNpLQRlWVar1YJC1Nne3sZRB4MB4pERrupNwCeTyXieBzsINgzDcRxd15Hy5ORkMpn4vo8VqFL+AXygESOiII3CkmmaKAIDB242mxzH/RUZHTiysYWaeoigYfCONpAPerAthbgyoouJkgKolApBRffGC4KmG74/68+WXa+Im7cdN+8WQCfv+eX56mK9udLGFP2FBpQOzhy2XmCZuCzFPPdlo1FZqhZHw/Zwrdlantva6Pa7jXq1COPocKcyh16wlm2jLGQiWOR4RuSzC9bu2tKkPb9vZvZy6TFomXtmegxa2b2s8c40drPZg4a90XSdBJTjzHhqHB8ThZLsfOt9+tX98PN+4XTKPf9D7/yuewbjnnt6p/BjJvVxQaB5okJ8IJvjBZFhlgk57HT3VzormlaT5SVFwVhXEjdIlCq6w3EsH+CiYfgrRNffTw6Ojo+X8eV6vf5o5L4qCYkEfsYVZVWleYHB2w6jLoIZhmEZRsXjJaosycFzFUA0kgUZmokMDt+ApnG3wvVgaKBZdjoWA2M0DcZDYhGcicfjDBPZ7GUk8BuDSRffSGuBlgAAAABJRU5ErkJggg=='); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="img"
+        title="img"
+        src="/static/dc1df5774e78c916e5d95d7d470ce829/8e749/macOS-rev.png"
+        srcset="/static/dc1df5774e78c916e5d95d7d470ce829/56d15/macOS-rev.png 200w,
+/static/dc1df5774e78c916e5d95d7d470ce829/8e749/macOS-rev.png 313w"
+        sizes="(max-width: 313px) 100vw, 313px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+      />
+  </a>
+    </span></p>
+<p>选择映像，然后选择刚刚找到的BaseSystem.dmg</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 643px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/a79d3a611521649c29bcc56d80d14a9a/45cbc/macOS-rev2.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 89.5%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAASCAIAAADUsmlHAAAACXBIWXMAAAsTAAALEwEAmpwYAAACx0lEQVQ4y2VTS08aURSe/1Ckynt4MzMwM8wMw/CGAbFYrEBsKZiyQGZoYk13TVz0lW77P7rozoVJE9OkNiZ117iXuDQmjYmxXdqPuRVt+4Vc7rnnfud859wzlCxJfCIhCoIsy9lsVtM0VVXTFjIWJEmCK5lMyrcgWaBSqrqy2qroerlcrlQqhA8mNvl8XhCE5DVwWxTFmYk9VavXP+zsbr98bRrGaDTq9Xrr6+uGYQwGg06n07SwtLTUarUKhQLHcSQKQpdKJSqbyz/s9u+vrFb0Wqms69Ua8uM20iJ/7hrFYhGKwFQUBXXBixOqUsxIfEyVE6rILLceGObQHG0ApmmOx+Nut0vKgyJogfnYAkxooYrNjVzzafqeodRH4fzQp3RjDBcKhcLhcDAYjEQiuq5DCMMwHo+HHMLr9/unNWcahlgzo7knQa0/L/Tu8mv+QMjlcuLqwsJCIpE4Pj6+urr6ur/P87zdbvd6vcQFk8qmJZ4NsRFa4EJs2ON32wOBgNvtxiWHw4Fun56e/jg/v7i8PDg4iEajLpfL5/PBNSUXimVFSaVUTU1rDBv3+mgIm5GhbXJy8nH3087nLxc/f600m7a5OZqm/5DR0ng8jh2qQiVwzDJDG3r77fBw++27F6/efD866rTbd2y2GzKeAeEFC3gJtAQhZmT0eTKZQPDe3t7Z2Rk6bLtNxouRiQMTMwAmyYyuYIXZ7/e3nm1tbm4Oh0OWZVEzqWhKxovjD12FbHQCjhmZAHmwEg45uSGjPbQFJMEp+P+QMZUYe+TAhMFLKnI6nVPyLB7R+T+ZsYBpIRWRTA6HUxDEKdl9DaINlxAYJrSBU6/X8RlgrVarjUYjndbUlOKYt4WDNBWLxaK3ABNdAYeYyIku4iRuAR96LqtxyQyjLjOyTnFc/O8fwY3JTsExDItA1drio7U2l1mVu+9ji89/A0wg9Y/Q/daFAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="img"
+        title="img"
+        src="/static/a79d3a611521649c29bcc56d80d14a9a/45cbc/macOS-rev2.png"
+        srcset="/static/a79d3a611521649c29bcc56d80d14a9a/56d15/macOS-rev2.png 200w,
+/static/a79d3a611521649c29bcc56d80d14a9a/d9f49/macOS-rev2.png 400w,
+/static/a79d3a611521649c29bcc56d80d14a9a/45cbc/macOS-rev2.png 643w"
+        sizes="(max-width: 643px) 100vw, 643px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+      />
+  </a>
+    </span></p>
+<p>引导时候选择这一分区即可</p>
+<p><span
+      class="gatsby-resp-image-wrapper"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 662px; "
+    >
+      <a
+    class="gatsby-resp-image-link"
+    href="/static/b9e71f83d54745b425a2fff2f20db42f/46b67/macOs-rev3.png"
+    style="display: block"
+    target="_blank"
+    rel="noopener"
+  >
+    <span
+    class="gatsby-resp-image-background-image"
+    style="padding-bottom: 43.50000000000001%; position: relative; bottom: 0; left: 0; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAYAAAAywQxIAAAACXBIWXMAAAsTAAALEwEAmpwYAAABdElEQVQoz4WS22rCQBCG9yWkVk0ENVSjIQfPiSYxBjexKqhtwSIUe9GLPkOv+uJ/M0Mj0uPFx+7Mzv4zO7Ni7Q8QRx7S5S2klFitVphOp+j3+xgMBuj1euzfbDbsyyF/kiTsT9P0jFjMAixTiTiOkXwKjkYjmKaJbrcLx3HYHo/HvL+EEtIZrcPhkFcxyaqRMkGSqUdRhPk8Qi8TsiwTequFTqcDXdeZdrt95tKfQz6hKgraHQP3h0cUCgUUiyUEc4nD0zMqShWqqp5RsthLvp7V63WIRqMBwzD4eVVVgW72cffyhofXdzhujNL1FQdXKpU/KZfLqNVqEEZWJglSz+gpzeZNVrrBaFoDlFDTtH+huFbWIuGHEfb7PbbbLfcwCAL4/pShJtu2/W0YBL2Ipn88HnE6nbDb7bBYLCBkOITneZhMJjxJEnFdly9YlsWXSfQn6OvQdPNJky3WoQ3PHWM2m3F19AfDMOTAvLrfBAlKmkP2BzNbH2+rbdbtAAAAAElFTkSuQmCC'); background-size: cover; display: block;"
+  ></span>
+  <img
+        class="gatsby-resp-image-image"
+        alt="img"
+        title="img"
+        src="/static/b9e71f83d54745b425a2fff2f20db42f/46b67/macOs-rev3.png"
+        srcset="/static/b9e71f83d54745b425a2fff2f20db42f/56d15/macOs-rev3.png 200w,
+/static/b9e71f83d54745b425a2fff2f20db42f/d9f49/macOs-rev3.png 400w,
+/static/b9e71f83d54745b425a2fff2f20db42f/46b67/macOs-rev3.png 662w"
+        sizes="(max-width: 662px) 100vw, 662px"
+        style="width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;"
+        loading="lazy"
+      />
+  </a>
+    </span></p></div><div class="navigation-module--navigation--3Zfju"><span class="navigation-module--button--28kp3"><a href="/2020/测试"><span class="navigation-module--iconPrev--23mg1">←</span><span class="navigation-module--buttonText--1Xod2">测试</span></a></span></div></div></div></div><footer><span class="footerCopyrights">© 2020 Built with <a href="https://www.gatsbyjs.org">Gatsby</a></span></footer></div></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/2020/手动创建macOS恢复分区";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":[],"app":[],"component---src-pages-404-js":[],"component---src-templates-index-js":[],"component---src-templates-page-js":[]};/*]]>*/</script><script src="/js/component---src-templates-page-js.js" async=""></script><script src="/js/55027a988c749907c8d0f13018f728b830987428.js" async=""></script><script src="/js/commons.js" async=""></script><script src="/js/styles.js" async=""></script><script src="/js/app.js" async=""></script><script src="/js/framework.js" async=""></script><script src="/js/webpack-runtime.js" async=""></script></body></html>
